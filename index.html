@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w2.org/1999/xhtml">
+<html lang="en">
+    <head>
+	<meta name="generator" content="Hugo 0.138.0">
+            <meta charset="utf-8" />
+    <title>steven&#39;s terminalcv </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My terminal cv">
+    <meta property="og:title" content="steven&#39;s terminalcv" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://steve-notes.github.io/resume/" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href=""/>
+    <link rel="canonical" href="https://steve-notes.github.io/resume/" />    <link rel="apple-touch-icon" sizes="180x180" href="/resume/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resume/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resume/favicon-16x16.png">
+    <link rel="manifest" href="/resume/site.webmanifest">
+    <link rel="mask-icon" href="/resume/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/resume/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.42.2/js/jquery.terminal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/less.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/autocomplete_menu.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.42.0/css/jquery.terminal.min.css" rel="stylesheet"/>
+
+    <style>
+        body {
+            width: 100%;
+            font-size: 18px;
+        }
+        .terminal, terminal-output > div:not(.raw) div > span:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji),
+        .cmd span[data-text]:not(.cmd-inverted):not(.token):not(.emoji) {
+        color: cyan;
+        background-color: #000;
+        }
+        .bar.terminal .inverted, .bar.cmd .cmd-inverted {
+    box-shadow: -2px 0 0 -1px #1cf3e8;
+    box-shadow: -2px 0 0 -1px var(--original-color, #1cf3e8);
+}
+
+ 
+@-webkit-keyframes terminal-bar {
+  0%, 50% {
+      box-shadow: -2px 0 0 -1px #1cf3e8;
+      box-shadow: calc(var(--line-thickness, 2) * -1px) 0 0 -1px var(--original-color, #1cf3e8);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+@-moz-keyframes terminal-bar {
+  0%, 50% {
+      box-shadow: -2px 0 0 -1px #1cf3e8;
+      box-shadow: calc(var(--line-thickness, 2) * -1px) 0 0 -1px var(--original-color, #1cf3e8);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+@keyframes terminal-bar {
+  0%, 50% {
+      box-shadow: -2px 0 0 -1px #1cf3e8;
+      box-shadow: calc(var(--line-thickness, 2) * -1px) 0 0 -1px var(--original-color, #1cf3e8);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+
+    </style>
+
+
+
+
+    </head>
+        <body>
+        
+<script> 
+jQuery(document).ready(function($) {
+    var animation = false;
+
+    var commands = {
+        help: "shows help",
+        less: "Use less as output method",
+        whois: "list basic details",
+        social: "list social networks",
+        work: "list work experience",
+        
+        skills: "list core skills",
+        
+        languages: "list spoken languages",
+        
+         
+            certifications: "list certifications",
+        
+        
+            startx: "starts graphical environment",
+        
+        
+        
+        
+            version: "Current version",
+        
+        
+            exit: "exit the terminal",
+        
+        
+    };
+
+    function progressBar(number) {
+        var barLength = Math.round(number / 10);
+        var barFilled = Array(barLength + 1).join("&#9611;");
+        var barBlank= Array(11 - barLength).join("&#9617;");
+
+        var barFilledColored = '[[b;lime;]' + barFilled + ']';
+        var barBlankColored = '[[b;#aaa;]' + barBlank + ']'; 
+        
+        return barFilledColored + barBlankColored;
+        
+    }
+
+    
+    function padKey(key, length) {
+        return key + ' '.repeat(length - key.length);
+    }
+
+    function commandsHelp() {
+        let longestKeyLength = Math.max(...Object.keys(commands).map(key => key.length));
+
+        let helpText = ""
+        for (let key in commands) {
+            if (commands.hasOwnProperty(key)) {
+                helpText += `[[;lime;]${padKey(key, longestKeyLength)}]\t[[;lime;]${commands[key]}]\n`
+            }
+        }
+        return helpText
+    }
+
+    var help = '\n[[b;lime;]usage:]\n' +
+                '\n[[;lime;]<command> - execute the command]\n' +
+                '[[;lime;] less <command> - use less to display the output]\n\n' +
+                '\n[[b;lime;]Available commands:]\n' + 
+               commandsHelp();
+
+    var whois = [
+     
+        '\n' +
+        '[[b;lime;]Name       : ]\t[[;lime;]Steven Agustinus]\n' + 
+        '[[b;lime;]Profession : ]\t[[;lime;]Devops Engineer]\n' +
+        
+        
+        '[[b;lime;]Email      :]\t[[;lime;]steve87.notes@gmail.com]\n' +
+        
+        
+        
+        '[[;lime;]\nResults-driven DevOps Engineer with extensive experience in managing and optimizing development, \ntesting, and production environments. Proficient in deploying, maintaining, and troubleshooting Kubernetes clusters, \nwith expertise in tools such as Rancher, Docker, and LXD\/LXC for efficient container orchestration. \nSkilled in designing and implementing CI\/CD pipelines using Jenkins and Jenkins Shared Library, \nwhile leveraging cloud platforms like Alibaba Cloud and Google Cloud Platform (GCP) to enable automation and scalability.\nStrong background in Linux system administration, complemented by expertise in monitoring and alerting tools such as Prometheus and Grafana. \nExperienced with databases including PostgreSQL, MySQL, and RethinkDB, as well as web technologies like HTML, CSS, AngularJS, and Python. \nCommitted to enhancing system reliability, performance, and security, with a proven track record of supporting teams \nin troubleshooting and driving system improvements.\n]' +
+        
+        '\r',
+    
+    ];
+
+    function social() { 
+        var hideName = false;
+        let sMap = { 
+             
+                
+                "[[;lime;]Github]": "[[;lime;]https:\/\/github.com\/steve-notes]",
+                
+                "[[;lime;]Linkedin]": "[[;lime;]https:\/\/linkedin.com]",
+                
+            
+        };
+
+        
+        socialText = []
+        for (let key in sMap) {
+            if (sMap.hasOwnProperty(key)) {
+                if (hideName) {
+                    socialText.push(sMap[key]);
+                } else { 
+                    let longestKeyLength = Math.max(...Object.keys(sMap).map(key => key.length));
+                    socialText.push(`${padKey(key, longestKeyLength)}\t${sMap[key]}`)
+                };
+            }
+        }
+
+        return socialText
+    }
+
+    var certifications = [
+    
+        
+            '---\n' +
+            '[[b;white;]Cloud Practioner Essentials ( Belajar Dasar AWS Cloud )]\n' +
+            'April 2024\n' +
+            
+            'Dicoding Indonesia\n' +
+            
+            
+            
+            'https:\/\/www.dicoding.com\/certificates\/RVZKR4M2QPD5\n' +
+            
+            '\r',
+        
+            '---\n' +
+            '[[b;white;]ACP Cloud Computing Certification]\n' +
+            'March 2024\n' +
+            
+            'Alibaba Cloud\n' +
+            
+            
+            
+            'https:\/\/shorturl.at\/ykG8B\n' +
+            
+            '\r',
+        
+            '---\n' +
+            '[[b;white;]Cloud Computing (Professional Academy)]\n' +
+            'March 2024\n' +
+            
+            'Digital Talent Scholarship\n' +
+            
+            
+            
+            'https:\/\/shorturl.at\/Q3JkU\n' +
+            
+            '\r',
+        
+            '---\n' +
+            '[[b;white;]ACA Cloud Computing Certification]\n' +
+            'February 2024\n' +
+            
+            'Alibaba Cloud\n' +
+            
+            
+            
+            'https:\/\/shorturl.at\/kxSEA\n' +
+            
+            '\r',
+        
+            '---\n' +
+            '[[b;white;]Linux - Red Hat]\n' +
+            'December 2022\n' +
+            
+            'Digital Talent Scholarship\n' +
+            
+            
+            
+            'https:\/\/shorturl.at\/83Tbg\n' +
+            
+            '\r',
+        
+    
+    ];
+    
+    var work = [
+    
+        
+            '---\n\n' +
+            '[[b;white;]Devops Engineer]\n' +
+             '🏢 Indonesia Fintopia Technology\n' +
+            '📍 Jakarta\n' +
+            '📅 Juni 2024 - Present\n' +
+            '\n' +
+            ' Managed communication with the HQ team in China regarding DevOps issues,\n managed Alibaba Cloud infrastructure, integrated third-party systems, monitored and troubleshot CI\/CD pipelines,\n and managed Kubernetes clusters using Rancher. Also created Bash scripts for Kubernetes management.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]Devops Engineer]\n' +
+             '🏢 Klik Digital Sinergi\n' +
+            '📍 Jakarta\n' +
+            '📅 October 2022  - October 2023\n' +
+            '\n' +
+            ' Conducted research and development (R\u0026D), built CI\/CD automation using Jenkins,\n and enhanced features by building a shared library supporting multi-environments (Kubernetes \u0026 Nomad)\n and various Git branch strategies for product automation.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]Devops Engineer]\n' +
+             '🏢 Huawei Tech Investment\n' +
+            '📍 Jakarta\n' +
+            '📅 September 2021 - October 2022\n' +
+            '\n' +
+            ' Managed Huawei Fault Management Tools (FMT), improved tools on the OWS platform,\n automated WhatsApp notifications, resolved tool issues, and integrated vendor alarm data into the FMT dashboard.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]Lead Web Developer]\n' +
+             '🏢 PT Integra Putra Mandiri\n' +
+            '📍 Jakarta\n' +
+            '📅 September 2019 - August 2021\n' +
+            '\n' +
+            ' Led the development team to deliver successful web projects. Maintained Linux servers, fixed bugs,\n and deployed updates. Built full-stack applications using Python Bottle and AngularJS. Automated deployments with\n Git hooks and shell scripts. Configured monitoring using Prometheus and Grafana. Provided technical guidance and mentorship.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]IT Implementer]\n' +
+             '🏢 PT Global Urban Essential\n' +
+            '📍 Tangerang\n' +
+            '📅 November 2018 - June 2019\n' +
+            '\n' +
+            ' Assisted clients in implementing technical systems, evaluated their needs,\n and developed configurations that supported business processes.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]Operational Specialist]\n' +
+             '🏢 PT Globvalindo Sukses Sejahtera\n' +
+            '📍 Tangerang\n' +
+            '📅 April 2016 - June 2018\n' +
+            '\n' +
+            ' Managed inventory, ensured accurate order deliveries, supervised the flow of goods,\n and handled market research to improve sales. Reviewed admin tasks and managed import restrictions.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]Web Programmer]\n' +
+             '🏢 PT BPM\n' +
+            '📍 Jakarta\n' +
+            '📅 December 2014 - March 2016\n' +
+            '\n' +
+            ' Built and customized e-commerce websites using Prestashop CMS.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]Graphic Designer]\n' +
+             '🏢 Balon Angkasa\n' +
+            '📍 Jakarta\n' +
+            '📅 March 2012 -  June 2014\n' +
+            '\n' +
+            ' Created designs according to client requests and worked on logo tracing and pattern creation for printing.' +
+            '\n\r',
+        
+            '---\n\n' +
+            '[[b;white;]IT Staff]\n' +
+             '🏢 CV Central Diesel\n' +
+            '📍 Jakarta\n' +
+            '📅 March 2011 - January 2012\n' +
+            '\n' +
+            ' Developed apps for administration and sales using FileMaker and provided technical support.' +
+            '\n\r',
+        
+    
+    ];
+
+    var education = [
+    
+    ];
+
+    var projects = [
+    
+        
+            '---\n' +
+            '[[b;red;]Project Red]\n' +
+            'since 2019\n' +
+            'https:\/\/example.com\n' +
+            
+            'Describing red stuff\n' +
+            
+            "\r",
+      
+            '---\n' +
+            '[[b;white;]Project Blue]\n' +
+            'since 2016\n' +
+            'https:\/\/example.com\/white\n' +
+            
+            "\r",
+      
+            '---\n' +
+            '[[b;grey;]Project Default]\n' +
+            'Since 2017\n' +
+            'https:\/\/example.com\/default\n' +
+            
+            "\r",
+      
+    
+    ];
+
+    var skills = [
+    
+        
+            '\n' +
+            '[[b;white;]Linux:]\n' +
+            progressBar( 80 ) +
+            '80' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Jenkins:]\n' +
+            progressBar( 70 ) +
+            '70' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Rancher:]\n' +
+            progressBar( 70 ) +
+            '70' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Bash Script:]\n' +
+            progressBar( 50 ) +
+            '50' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Python:]\n' +
+            progressBar( 65 ) +
+            '65' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Javascript:]\n' +
+            progressBar( 65 ) +
+            '65' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]GIT:]\n' +
+            progressBar( 80 ) +
+            '80' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Alibaba Cloud:]\n' +
+            progressBar( 50 ) +
+            '50' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]GCP:]\n' +
+            progressBar( 50 ) +
+            '50' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Docker:]\n' +
+            progressBar( 60 ) +
+            '60' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Terraform:]\n' +
+            progressBar( 40 ) +
+            '40' + '%\n' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;white;]Sonarqube:]\n' +
+            progressBar( 40 ) +
+            '40' + '%\n' +
+            
+            '\r',
+        
+    
+    ];
+
+    var softSkills = [
+    
+    ];
+  
+    var languages = [
+    
+        
+            '\n' +
+            '[[b;white;]English:]\n' +
+            progressBar( 50 )+ 
+            '50' + '%\n' +
+            
+            'Conversation level' +
+            
+            '\r',
+        
+            '\n' +
+            '[[b;grey;]Indonesia:]\n' +
+            progressBar( 100 )+ 
+            '100' + '%\n' +
+            
+            '\r',
+        
+    
+    ];
+
+    var misc = [
+         
+    ];
+
+    var source =  '        _______            \n' +
+                  '       |       |           \n' +
+                  '       |       |           \n' +
+                  '       |_______|_______    \n' +
+                  '               |       |   \n' +
+                  '               |       |   \n' +
+                  ' ______________|_______|   \n' +
+                  '|      |       |       |   \n' +
+                  '|      |       |       |   \n' +
+                  '|______|_______|_______|   \n' +
+                  '[[;red;]May the source be with you]\n' +
+                  '[[;grey;]https://github.com/coolapso/hugo-theme-terminalcv\n';
+
+    var all = [ 
+        whois,
+        social(),
+        work,
+         
+        skills,
+        
+
+  
+        certifications
+    ]
+
+    $('body').terminal(function(command, term) {
+
+        var useLess = false;
+        
+
+        function echoArray(array) {
+            if (useLess) {
+                term.less(array);
+            } else {
+                for (i = 0; i < array.length; i += 1) {
+                    term.echo(array[i]);
+                }
+            }
+        }
+        
+        function progress(percent, width) {
+            var size = Math.round(width*percent/100);
+            var left = '', taken = '', i;
+            for (i=size; i--;) {
+                taken += '=';
+            }
+            if (taken.length > 0) {
+                taken = taken.replace(/=$/, '>');
+            }
+            for (i=width-size; i--;) {
+                left += ' ';
+            }
+            
+            return '[[' + 'b;lime;' + ']' + taken + left + '] ' + percent + '%';
+
+        }
+
+        function loading () {
+            var i = 0, size = 30;
+            prompt = term.get_prompt();
+            string = progress(0, size);
+            term.set_prompt(progress);
+            animation = true;
+            (function loop() {
+                string = progress(i++, size);
+                term.set_prompt(string);
+                if (i < 100) {
+                    timer = setTimeout(loop, 10);
+                } else {
+                    term.echo(progress(i, size) + ' [[b;green;]OK]').set_prompt(prompt);
+                    animation = false
+                }
+            })();
+        }
+
+        commands = command.split(/[ ]+/);
+        if (commands[0] == 'less') {
+            useLess = true;
+            commands.shift();
+        } 
+                    
+        switch(commands[0]) {
+            case 'whois':
+                
+                echoArray(whois);
+                break;
+            case 'social':
+                
+                echoArray(social());
+                break;
+            case 'work':
+                
+                echoArray(work);
+                break;
+            case 'education':
+                
+                echoArray(education);
+                break;
+            case 'skills':
+                
+                echoArray(skills);
+                break;
+            case 'softskills':
+                
+                echoArray(softSkills);
+                break;
+            case 'languages':
+                
+                echoArray(languages);
+                break;
+            case 'projects':
+                
+                echoArray(projects);
+                break;
+            case 'certifications':
+                
+                term.echo(certifications);
+                break;
+            case 'misc':
+                
+                echoArray(misc);
+                break;
+            case 'help':
+            case '?':
+                term.echo(help);
+                break;
+            case 'all':
+                
+                echoArray(all.flat(1));
+                break;
+            
+            case 'startx':
+                term.echo("loading ...");
+                loading();
+                setTimeout(function(){window.location = "https:\/\/steve-notes.github.io\/"}, 2000);
+                break;
+            
+            case ':(){:|:&};:':
+                term.echo("nice try");
+                break;
+            
+
+
+            
+            case 'exit':
+                term.echo("terminating ... ")
+                loading();
+                setTimeout(function(){window.location = 'about:blank'}, 2000);
+                break;
+            
+            
+            case 'version':
+                term.echo("2.0.0");
+                break;
+            
+            case '':
+                break;
+            default:
+                term.echo("\nunknown command: " + command + "\n" +
+                          "please type 'help' or '?' for a list of available commands\n");
+        }
+    }, {
+        prompt: '[[;red;][][[;cyan;]steven@terminalCV][[;red;]\\]][[;grey;]-][[;red;][][[;cyan;]~\/terminalcv][[;red;]\\]][[;orange;]: ]',
+
+        greetings: "[[b;lime;]\n‎\n ____  _                            _                   _   _                 \n\/ ___|| |_ _____   _____ _ __      \/ \\   __ _ _   _ ___| |_(_)_ __  _   _ ___ \n\\___ \\| __\/ _ \\ \\ \/ \/ _ \\ \u0027_ \\    \/ _ \\ \/ _\u0060 | | | \/ __| __| | \u0027_ \\| | | \/ __|\n ___) | ||  __\/\\ V \/  __\/ | | |  \/ ___ \\ (_| | |_| \\__ \\ |_| | | | | |_| \\__ \\\n|____\/ \\__\\___| \\_\/ \\___|_| |_| \/_\/   \\_\\__, |\\__,_|___\/\\__|_|_| |_|\\__,_|___\/\n                                      |___\/    \n _                      _             _  _______      __\n| |                    (_)           | |\/ ____\\ \\    \/ \/\n| |_ ___ _ __ _ __ ___  _ _ __   __ _| | |     \\ \\  \/ \/ \n| __\/ _ \\ \u0027__| \u0027_ \u0060 _ \\| | \u0027_ \\ \/ _\u0060 | | |      \\ \\\/ \/  \n| ||  __\/ |  | | | | | | | | | | (_| | | |____   \\  \/   \n \\__\\___|_|  |_| |_| |_|_|_| |_|\\__,_|_|\\_____|   \\\/\n\n\nWelcome to my online resume!\n\nType \u0027startx\u0027 to go to my log : https:\/\/steve-notes.github.io\n\nType \u0027help\u0027 for a list of available commands\n]",
+
+        keydown: function(e, term) {
+            if (animation) {
+                if (e.which == 68 && e.ctrlKey) { 
+                    clearTimeout(timer);
+                    animation = false;
+                    term.echo(string + ' [[b;red;]FAIL]')
+                    .set_prompt(prompt);
+                }
+                return false;
+            }
+        },
+        autocompleteMenu: true,
+        completion: Object.keys(commands)
+        
+    });
+});
+</script>
+
+        </body>
+</html>
